@@ -24,6 +24,6 @@ class Controller extends ApiController
 
     public function test()
     {
-        dd('test');
+        return response()->json(['test' => 'test']);;
     }
 }

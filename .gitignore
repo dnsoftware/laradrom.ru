@@ -18,3 +18,5 @@ yarn-error.log
 /backup/
 /storage/
 commits_del.sh
+/public/js/
+/public/css/

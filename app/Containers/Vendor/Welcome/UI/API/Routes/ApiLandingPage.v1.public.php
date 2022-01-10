@@ -9,4 +9,5 @@ Route::get('/', [Controller::class, 'v1ApiLandingPage'])
 
 
 Route::get('/test', [Controller::class, 'test'])
+    ->middleware('auth:sanctum')
     ->name('test');
