@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'v1ApiLandingPage'])
     ->name('v1_api_landing_route');
 
-
 Route::get('/test', [Controller::class, 'test'])
     ->middleware('auth:sanctum')
     ->name('test');
