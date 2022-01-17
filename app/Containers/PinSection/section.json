@@ -1,0 +1,6 @@
+{
+    "name": "PinSection",
+    "description": "Работа с пинами",
+    "main-container": "PinItem"
+}
+

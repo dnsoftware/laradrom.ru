@@ -2,17 +2,23 @@
 
 namespace Tests\Feature;
 
+use App\Containers\AppSection\Common\Tasks\DatabaseSeedByTestSqlDumpTask;
+use App\Containers\AppSection\Common\Tasks\DropAllDatabaseTablesTask;
+use App\Containers\PinSection\PinType\Models\PinType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
+
+    public function testBasicTest()
     {
         $response = $this->get('/');
 
