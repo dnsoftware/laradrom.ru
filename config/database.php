@@ -17,6 +17,10 @@ return [
 
     'default' => env('DB_CONNECTION', 'mysql'),
 
+    // CQRS соединения для разделения чтения и записи
+    'write_connection' => 'pgsql',
+    'read_connection' => 'pgsql_slave',
+
     /*
     |--------------------------------------------------------------------------
     | Database Connections

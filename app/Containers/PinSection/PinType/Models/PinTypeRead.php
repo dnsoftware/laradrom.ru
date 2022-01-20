@@ -2,22 +2,21 @@
 
 namespace App\Containers\PinSection\PinType\Models;
 
+use App\Ship\Parents\Models\ReadModel;
 use App\Ship\Parents\Models\WriteModel;
 
 /**
- * Модель для записи (Commands в терминах CQRS)
- * PinType без суффикса 'Write' потому что допустимы операции чтения, когда этого нельзя избежать
- * во Write модели нет отношений
+ * Модель для чтения (Queries в терминах CQRS)
+ * операции записи недопустимы (блокированы на уровне объекта)
+ * В Read модели поле $fillable пустое
  */
-class PinType extends WriteModel
+class PinTypeRead extends ReadModel
 {
     public $timestamps = false;
 
     protected $table = 'pin_types';
 
-    protected $fillable = [
-        'name', 'description', 'slug'
-    ];
+    protected $fillable = [];
 
     protected $attributes = [
 
