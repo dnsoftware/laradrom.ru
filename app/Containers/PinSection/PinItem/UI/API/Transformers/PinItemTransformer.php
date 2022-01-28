@@ -3,6 +3,7 @@
 namespace App\Containers\PinSection\PinItem\UI\API\Transformers;
 
 use App\Containers\PinSection\PinItem\Models\PinItem;
+use App\Containers\PinSection\PinItem\Models\PinItemRead;
 use App\Ship\Parents\Transformers\Transformer;
 
 class PinItemTransformer extends Transformer
@@ -21,7 +22,7 @@ class PinItemTransformer extends Transformer
 
     ];
 
-    public function transform(PinItem $pinitem): array
+    public function transform(PinItemRead $pinitem): array
     {
         $response = [
             'object' => $pinitem->getResourceKey(),

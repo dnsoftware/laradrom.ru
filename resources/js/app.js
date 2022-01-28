@@ -8,7 +8,7 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 
-
+/*
 new Vue({
     el: '#app',
 
@@ -18,4 +18,4 @@ new Vue({
 
     router
 });
-
+*/

@@ -2,9 +2,13 @@
 
 namespace App\Containers\PinSection\PinItem\Providers;
 
+use App\Containers\PinSection\PinItem\Data\Queries\DbPinItemQueries;
+use App\Containers\PinSection\PinItem\Data\Queries\PinItemQueries;
 use App\Containers\PinSection\PinItem\View\Components\FilteredPinsHeader;
 use App\Containers\PinSection\PinItem\View\Components\PinItemsFilteredList;
 use App\Containers\PinSection\PinItem\View\Components\PinItemTargetLink;
+use App\Containers\PinSection\PinType\Data\Queries\DbPinTypeQueries;
+use App\Containers\PinSection\PinType\Data\Queries\PinTypeQueries;
 use App\Ship\Parents\Providers\MainProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -34,8 +38,8 @@ class MainServiceProvider extends MainProvider
     {
         parent::register();
 
-        // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        // ...
+        $this->app->bind(PinItemQueries::class,
+            DbPinItemQueries::class);
     }
 
     public function boot(): void

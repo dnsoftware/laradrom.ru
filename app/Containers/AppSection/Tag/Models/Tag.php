@@ -3,8 +3,9 @@
 namespace App\Containers\AppSection\Tag\Models;
 
 use App\Ship\Parents\Models\Model;
+use App\Ship\Parents\Models\WriteModel;
 
-class Tag extends Model
+class Tag extends WriteModel
 {
     protected $fillable = [
         'name',

@@ -15,7 +15,7 @@ class AddPinItemAction extends Action
     {
         $user = Auth::user();
         $boards = app(GetUserBoardsTask::class)->run($user->id);
-        $pin_types = app(GetAllPinTypesTask::class)->addRequestCriteria()->run();
+        $pin_types = app(GetAllPinTypesTask::class)->run();
         $stack_items = app(GetAllStackItemsTask::class)->run();
         $pinitem_api_route_part = app(MakePinitemApiRoutePartAction::class)->run();
         $publication_statuses = PinItem::PUBLICATION_STATUSES;

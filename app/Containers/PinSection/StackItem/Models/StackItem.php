@@ -3,8 +3,9 @@
 namespace App\Containers\PinSection\StackItem\Models;
 
 use App\Ship\Parents\Models\Model;
+use App\Ship\Parents\Models\WriteModel;
 
-class StackItem extends Model
+class StackItem extends WriteModel
 {
     protected $fillable = [
 
