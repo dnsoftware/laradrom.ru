@@ -4,7 +4,7 @@ namespace App\Containers\PinSection\PinType\Providers;
 
 use App\Containers\AppSection\Common\Tasks\DatabaseSeedByTestSqlDumpTask;
 use App\Containers\AppSection\Common\Tasks\DropAllDatabaseTablesTask;
-use App\Containers\PinSection\PinType\Data\Queries\DbPinTypeQueries;
+use App\Containers\PinSection\PinType\Data\Queries\DatabasePinTypeQueries;
 use App\Containers\PinSection\PinType\Data\Queries\PinTypeQueries;
 use App\Containers\PinSection\PinType\Tasks\GetAllPinTypesTask;
 use App\Ship\Parents\Providers\MainProvider;
@@ -38,7 +38,7 @@ class MainServiceProvider extends MainProvider
         parent::register();
 
         $this->app->bind(PinTypeQueries::class,
-            DbPinTypeQueries::class);
+            DatabasePinTypeQueries::class);
     }
 
     public function boot(): void

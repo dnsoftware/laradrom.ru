@@ -12,6 +12,6 @@ class SayWelcomeCommand extends ConsoleCommand
 
     public function handle(): void
     {
-        echo "Welcome to Apiato :)\n";
+        echo "Welcome to Laradrom :)\n";
     }
 }

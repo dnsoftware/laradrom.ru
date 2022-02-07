@@ -13,23 +13,11 @@ use App\Ship\Parents\Models\WriteModel;
 class PinTypeRead extends ReadModel
 {
     public $timestamps = false;
-
     protected $table = 'pin_types';
-
     protected $fillable = [];
-
-    protected $attributes = [
-
-    ];
-
-    protected $hidden = [
-
-    ];
-
-    protected $casts = [
-
-    ];
-
+    protected $attributes = [];
+    protected $hidden = [];
+    protected $casts = [];
 
     /**
      * A resource key to be used in the serialized responses.

@@ -2,6 +2,7 @@
 
 namespace App\Containers\PinSection\PinType\UI\API\Controllers;
 
+use App\Containers\PinSection\PinType\Data\Factories\PinTypePopoFactory;
 use App\Containers\PinSection\PinType\Tasks\FindPinTypeByIdTask;
 use App\Containers\PinSection\PinType\Tasks\GetAllPinTypesTask;
 use App\Ship\Parents\Controllers\ApiController;

@@ -8,6 +8,6 @@ class FindMessageForApiRootVisitorAction extends Action
 {
     public function run(): array
     {
-        return ['Welcome to Apiato'];
+        return ['Welcome to Laradrom'];
     }
 }

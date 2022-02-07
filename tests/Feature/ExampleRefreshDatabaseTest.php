@@ -16,7 +16,7 @@ class ExampleRefreshDatabaseTest extends TestCase
     public $seeder = 'DatabaseSeeder';
 
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
     }

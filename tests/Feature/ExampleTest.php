@@ -12,7 +12,7 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
     }
