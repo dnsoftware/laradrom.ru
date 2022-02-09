@@ -20,7 +20,7 @@ class GetUserProfileControllerTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get($this->apiUrl('v1').'/user/profile');
+            ->get($this->apiUrl('v1').'/person/profile');
 
         $response
             ->assertStatus(200)

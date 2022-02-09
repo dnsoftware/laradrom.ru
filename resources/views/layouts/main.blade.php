@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="api-base-url" content="{{ env('API_URL_VERSION') }}" />
+    <meta name="api-base-url" content="{{ env('API_URL') }}/v1" />
     <meta name="web-base-url" content="{{ env('APP_URL') }}" />
     <title>Document</title>
 

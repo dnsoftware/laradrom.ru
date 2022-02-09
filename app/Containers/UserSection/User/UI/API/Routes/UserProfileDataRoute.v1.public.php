@@ -4,7 +4,7 @@
  * @apiGroup           User
  * @apiName            getUserProfile
  *
- * @api                {GET} /v1/user/profile Endpoint title here..
+ * @api                {GET} /v1/person/profile Endpoint title here..
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0
@@ -22,7 +22,7 @@
 use App\Containers\UserSection\User\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('user/profile', [Controller::class, 'getUserProfile'])
+Route::get('person/profile', [Controller::class, 'getUserProfile'])
     ->name('api_user_get_user_profile')
     ->middleware(['auth:sanctum'])
 ;
