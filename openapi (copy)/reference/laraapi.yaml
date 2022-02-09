@@ -87,6 +87,28 @@ paths:
                   lastName: Baker
                   dateOfBirth: '1985-10-02'
         description: Patch user properties to update.
+  /pinitems/create:
+    post:
+      summary: ''
+      operationId: post-pinitems-create
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+      description: ''
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples: {}
+        description: ''
+    parameters: []
   /person/profile:
     get:
       summary: Your GET endpoint
@@ -102,19 +124,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/LaraUser'
               examples:
-                example-1:
+                profile:
                   value:
-                    id: 0
-                    name: string
+                    id: 1
+                    name: Вася Пупкин
                     email: user@example.com
-                    currentTeamId: 0
-                    profilePhotoPath: string
+                    current_team_id: 1
+                    profile_photo_path: profile-photos/45454545.png
       security:
         - apiKey: []
     parameters: []
-  /blog/posts:
+  /blogposts:
     get:
       summary: Your GET endpoint
       tags: []
@@ -125,7 +147,7 @@ paths:
             application/json:
               schema:
                 type: object
-              examples: {}
+                properties: {}
       operationId: get-posts
       description: Список постов блога
       parameters:
@@ -135,119 +157,12 @@ paths:
           name: search
           description: Строка поиска
         - schema:
-            type: integer
+            type: string
           in: query
-          name: userid
-          description: Код пользователя-владельца
-    parameters: []
-    post:
-      summary: ''
-      operationId: post-blog-posts
-      responses:
-        '200':
-          description: OK
-      description: Создание нового поста
-      security:
-        - apiKey: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                    attributes:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        content:
-                          type: string
-                    relationship:
-                      type: object
-                      properties:
-                        category:
-                          type: object
-                          properties:
-                            data:
-                              type: object
-                              properties:
-                                type:
-                                  type: string
-                                id:
-                                  type: integer
-            examples:
-              example-1:
-                value:
-                  data:
-                    type: post
-                    attributes:
-                      title: Заголовок
-                      content: Содержимое поста
-                    relationship:
-                      category:
-                        data:
-                          type: category
-                          id: 1
-          application/xml:
-            schema:
-              type: object
-              properties: {}
-            examples: {}
-          multipart/form-data:
-            schema:
-              type: object
-              properties: {}
-          text/html:
-            schema:
-              type: object
-              properties: {}
-          text/plain:
-            schema:
-              type: object
-              properties: {}
-        description: ''
-      parameters: []
-  /blog/posts/create:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  blogСategories:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-              examples:
-                example-1:
-                  value:
-                    blogСategories:
-                      - id: 0
-                        name: string
-      operationId: get-blog-posts-create
-      description: |
-        Получение вспомогательных данных (справочник категорий) для страницы с формой добавления поста
-      security:
-        - apiKey: []
     parameters: []
 components:
   schemas:
-    User:
+    LaraUser:
       title: LaraUser
       type: object
       description: ''
@@ -255,8 +170,8 @@ components:
         - id: 0
           name: string
           email: user@example.com
-          currentTeamId: 0
-          profilePhotoPath: string
+          current_team_id: 0
+          profile_photo_path: string
       x-internal: false
       properties:
         id:
@@ -268,9 +183,9 @@ components:
         email:
           type: string
           format: email
-        currentTeamId:
+        current_team_id:
           type: integer
-        profilePhotoPath:
+        profile_photo_path:
           type: string
       required:
         - id
@@ -312,16 +227,6 @@ components:
           type: string
         content:
           type: string
-    Categories:
-      title: Categories
-      type: object
-      properties:
-        id:
-          type: integer
-        user_id:
-          type: integer
-        name:
-          type: string
   securitySchemes:
     apiKey:
       name: X-XSRF-TOKEN
@@ -330,29 +235,3 @@ components:
   requestBodies: {}
   examples: {}
   parameters: {}
-  responses:
-    BlogPostResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  id:
-                    type: integer
-                  attributes:
-                    type: object
-                    properties:
-                      userId:
-                        type: integer
-                      categoryId:
-                        type: integer
-                      title:
-                        type: string
-                      content:
-                        type: string
