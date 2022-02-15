@@ -5,7 +5,7 @@ namespace App\Containers\UserSection\User\Models;
 use App\Ship\Parents\Models\WriteModel;
 
 
-class LaraUser extends WriteModel
+class LaraUserWrite extends WriteModel
 {
     public $timestamps = false;
 

@@ -13,7 +13,7 @@ class BlogCategoryReadFactory extends Factory
     {
         return [
             'id' => $this->faker->unique()->randomNumber(5, false),
-            'userId' => $this->faker->unique()->randomNumber(5, false),
+            'user_id' => $this->faker->unique()->randomNumber(5, false),
             'name' => $this->faker->name(),
         ];
 

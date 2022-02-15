@@ -2,7 +2,9 @@
 
 namespace App\Containers\UserSection\User\Data\POPO;
 
-class LaraUser
+use App\Ship\Parents\POPO\Popo;
+
+class LaraUser extends Popo
 {
     public int $id;
     public string $name;

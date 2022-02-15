@@ -245,6 +245,72 @@ paths:
       security:
         - apiKey: []
     parameters: []
+  /blog/categories/create:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-blog-category-create
+    parameters: []
+  /blog/categories:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-blog-categories
+    patch:
+      summary: ''
+      operationId: patch-blog-categories
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+                    properties:
+                      fieldName:
+                        type: object
+                        properties:
+                          '0':
+                            type: string
+                          '1':
+                            type: string
+              examples:
+                example-1:
+                  value:
+                    message: Общее сообщение об ошибке
+                    errors:
+                      fieldName:
+                        '0': Причина непрохождения валидации 1
+                        '1': Причина непрохождения валидации 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value: {}
+        description: ''
 components:
   schemas:
     User:

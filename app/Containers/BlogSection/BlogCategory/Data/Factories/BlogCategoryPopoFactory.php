@@ -5,6 +5,7 @@ namespace App\Containers\BlogSection\BlogCategory\Data\Factories;
 use App\Containers\BlogSection\BlogCategory\Data\POPO\BlogCategory;
 use App\Containers\BlogSection\BlogCategory\Data\POPO\Collections\BlogCategoryCollection;
 use App\Containers\BlogSection\BlogCategory\Models\BlogCategoryRead;
+use App\Ship\Parents\Models\BaseModel;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -22,12 +23,12 @@ class BlogCategoryPopoFactory
         return $item;
     }
 
-    public function createFromEloquent(BlogCategoryRead $item): BlogCategory
+    public function createFromEloquent(BaseModel $item): BlogCategory
     {
         $new = new BlogCategory();
 
         $new->id = $item->id;
-        $new->userId = $item->userId;
+        $new->userId = $item->user_id;
         $new->name = $item->name;
 
         return $new;

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Containers\UserSection\User\Data\POPO;
 
+use App\Containers\BlogSection\BlogCategory\Data\POPO\BlogCategory;
 use App\Containers\PinSection\PinType\Data\Factories\PinTypePopoFactory;
 use App\Containers\UserSection\User\Data\Factories\LaraUserPopoFactory;
 use App\Containers\UserSection\User\Data\Factories\LaraUserReadFactory;
@@ -10,13 +11,13 @@ use Tests\TestCase;
 
 class LaraUserFactoryTest extends TestCase
 {
-    private $structure = [
-        'id' => null,
-        'name' => null,
-        'email' => null,
-        'currentTeamId' => null,
-        'profilePhotoPath' => null,
-    ];
+    private $structure ;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->structure = LaraUser::getStructure();
+    }
 
 
     // Проверка совпадения структуры

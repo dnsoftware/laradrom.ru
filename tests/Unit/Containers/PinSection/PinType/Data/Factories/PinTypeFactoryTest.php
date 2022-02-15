@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Containers\PinSection\PinType\Data\Factories;
 
+use App\Containers\BlogSection\BlogCategory\Data\POPO\BlogCategory;
 use App\Containers\PinSection\PinType\Data\Factories\PinTypePopoFactory;
 use App\Containers\PinSection\PinType\Data\Factories\PinTypeReadFactory;
 use App\Containers\PinSection\PinType\Data\POPO\Collections\PinTypeCollection;
@@ -12,15 +13,13 @@ use Tests\TestCase;
 
 class PinTypeFactoryTest extends TestCase
 {
-    private array $structure = [
-        'id' => null,
-        'name' => null,
-        'description' => null,
-        'pinCount' => null,
-        'slug' => null,
-        'orderNum' => null,
-        'backColor' => null,
-    ];
+    private array $structure;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->structure = PinType::getStructure();
+    }
 
 
     // Проверка совпадения структуры

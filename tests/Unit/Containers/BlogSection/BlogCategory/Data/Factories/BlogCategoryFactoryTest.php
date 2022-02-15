@@ -11,11 +11,13 @@ use Tests\TestCase;
 
 class BlogCategoryFactoryTest extends TestCase
 {
-    private array $structure = [
-        'id' => null,
-        'userId' => null,
-        'name' => null,
-    ];
+    private array $structure;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->structure = BlogCategory::getStructure();
+    }
 
 
     // Проверка совпадения структуры
@@ -42,7 +44,6 @@ class BlogCategoryFactoryTest extends TestCase
 
     public function test_check_blog_category_collection_object()
     {
-
         $eloquentCollection = app(BlogCategoryReadFactory::class)->count(5)->make();
         $this->assertInstanceOf(Collection::class, $eloquentCollection);
 

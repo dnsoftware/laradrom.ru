@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class __PinItem extends WriteModel
+class PinItemWrite extends WriteModel
 {
     use Searchable;
 

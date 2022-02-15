@@ -2,7 +2,9 @@
 
 namespace App\Containers\PinSection\PinType\Data\POPO;
 
-class PinType
+use App\Ship\Parents\POPO\Popo;
+
+class PinType extends Popo
 {
     // свойства
     public int      $id;

@@ -18,8 +18,8 @@ return [
     'default' => env('DB_CONNECTION', 'mysql'),
 
     // CQRS соединения для разделения чтения и записи
-    'write_connection' => 'pgsql',
-    'read_connection' => 'pgsql_slave',
+    'write_connection' => env('POSTGRES_HOST', 'pgsql'),
+    'read_connection' => env('POSTGRES_HOST_SLAVE', 'pgsql_slave'),
 
     /*
     |--------------------------------------------------------------------------

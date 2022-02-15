@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Containers\PinSection\PinItem\Data\DTO;
+namespace App\Containers\BlogSection\BlogCategory\Data\DTO;
 
 use App\Ship\Parents\Requests\Request;
 
-class PinItemDtoFactory
+class BlogCategoryDtoFactory
 {
-    public function fromArray(array $data)
+    public function fromArray(array $data): BlogCategoryDto
     {
-        $dto = new PinItemDto();
+        $dto = new BlogCategoryDto();
 
-        $property_list = get_class_vars(PinItemDto::class);
+        $property_list = get_class_vars(BlogCategoryDto::class);
         foreach ($property_list as $property => $pval) {
             if (isset($data[$property])) {
                 $dto->$property = $data[$property];

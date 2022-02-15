@@ -9,7 +9,7 @@ use App\Ship\Parents\Models\WriteModel;
  * PinType без суффикса 'Write' потому что допустимы операции чтения, когда этого нельзя избежать
  * во Write модели нет отношений
  */
-class PinType extends WriteModel
+class PinTypeWrite extends WriteModel
 {
     public $timestamps = false;
 
