@@ -22,4 +22,27 @@ class DatabaseBlogCategoryCommands implements BlogCategoryCommands
 
         return $item;
     }
+
+    public function update(BlogCategoryDto $data): BlogCategory
+    {
+        $upd = BlogCategoryWrite::where('id', $data->id)
+                ->update([
+                    'name' => $data->name,
+                ]);
+
+        $row = BlogCategoryWrite::find($data->id);
+
+        $item = app(BlogCategoryPopoFactory::class)->createFromEloquent($row);
+
+        return $item;
+    }
+
+    public function delete(int $categoryId)
+    {
+        $res = BlogCategoryWrite::where('id', $categoryId)->delete();
+
+        return $res;
+    }
+
+
 }

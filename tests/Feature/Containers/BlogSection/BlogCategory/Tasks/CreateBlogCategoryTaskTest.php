@@ -13,11 +13,9 @@ use Tests\TestCase;
 
 class CreateBlogCategoryTaskTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
+    public $seeder = 'DatabaseSeeder';
+
     public function test_example()
     {
         $user = User::factory()->create();

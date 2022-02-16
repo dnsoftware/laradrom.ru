@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class BlogCategoryControllerTest extends TestCase
@@ -74,7 +75,7 @@ class BlogCategoryControllerTest extends TestCase
     }
 
 
-    // Ответ 200 и создание категории
+    // Ответ 200 и обновление категории
     public function test_update_request_200()
     {
         $item = $this->addCategory();
@@ -85,7 +86,9 @@ class BlogCategoryControllerTest extends TestCase
 
         $response->assertStatus(200)
                  ->assertJson([
-                'name' => 'Вася'
+                     'data' => [
+                         'name' => 'Вася'
+                     ]
         ]);
     }
 
@@ -102,13 +105,42 @@ class BlogCategoryControllerTest extends TestCase
             'name' => 'Вася'
         ]);
 
-        $response->dump();
-
-        $response->assertStatus(401);
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
         $response->assertJson([
-            'type' => 'noauthUpdate'
+            'status' => 'error'
         ]);
     }
+
+
+    public function test_delete_category()
+    {
+        $item = $this->addCategory();
+
+        $this->actingAs($this->user);
+        $response = $this->deleteJson($this->apiUrl('v1').'/blog/categories/' . $item->id);
+
+        $response->assertStatus(204);
+    }
+
+
+    public function test_noauthorized_delete_category()
+    {
+        $item = $this->addCategory();
+
+        $this->user = User::factory()->create([
+            'id' => '999999'
+        ]);
+        $this->actingAs($this->user);
+        $response = $this->deleteJson($this->apiUrl('v1').'/blog/categories/' . $item->id);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $response->assertJson([
+            'status' => 'error'
+        ]);
+
+    }
+
+
 
 
 

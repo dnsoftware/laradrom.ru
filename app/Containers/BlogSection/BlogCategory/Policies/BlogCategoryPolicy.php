@@ -19,4 +19,8 @@ class BlogCategoryPolicy
         return $user->id === $blogCategory->userId;
     }
 
+    public function delete (User $user, BlogCategory $blogCategory) {
+        return $user->id === $blogCategory->userId;
+    }
+
 }

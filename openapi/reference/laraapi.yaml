@@ -254,7 +254,7 @@ paths:
           description: OK
       operationId: get-blog-category-create
     parameters: []
-  /blog/categories:
+  '/blog/categories/{id}':
     get:
       summary: Your GET endpoint
       tags: []
@@ -311,6 +311,12 @@ paths:
               example-1:
                 value: {}
         description: ''
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
 components:
   schemas:
     User:
