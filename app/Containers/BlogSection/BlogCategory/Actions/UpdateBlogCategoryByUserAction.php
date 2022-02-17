@@ -6,6 +6,7 @@ use App\Containers\BlogSection\BlogCategory\Data\DTO\BlogCategoryDto;
 use App\Containers\BlogSection\BlogCategory\Tasks\GetBlogCategoryByIdTask;
 use App\Containers\BlogSection\BlogCategory\Tasks\UpdateBlogCategoryTask;
 use App\Ship\DTOs\ActionErrorDTO;
+use App\Ship\DTOs\ActionReturnDTO;
 use App\Ship\DTOs\ActionSuccessDTO;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotAuthorizedResourceException;
@@ -16,7 +17,7 @@ use Mockery\Exception;
 
 class UpdateBlogCategoryByUserAction extends Action
 {
-    public function run(BlogCategoryDto $dto)
+    public function run(BlogCategoryDto $dto): ActionReturnDTO
     {
         try {
             $blogCategory = app(GetBlogCategoryByIdTask::class)->run($dto->id);

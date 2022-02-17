@@ -5,6 +5,7 @@ namespace App\Containers\BlogSection\BlogCategory\Actions;
 use App\Containers\BlogSection\BlogCategory\Tasks\DeleteBlogCategoryTask;
 use App\Containers\BlogSection\BlogCategory\Tasks\GetBlogCategoryByIdTask;
 use App\Ship\DTOs\ActionErrorDTO;
+use App\Ship\DTOs\ActionReturnDTO;
 use App\Ship\DTOs\ActionSuccessDTO;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotAuthorizedResourceException;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DeleteBlogCategoryAction extends Action
 {
-    public function run(int $categoryId)
+    public function run(int $categoryId): ActionReturnDTO
     {
         try {
             $blogCategory = app(GetBlogCategoryByIdTask::class)->run($categoryId);

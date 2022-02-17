@@ -15,6 +15,7 @@ use Tests\TestCase;
 class BlogCategoryControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     public $seeder = 'DatabaseSeeder';
 
     private $user;
@@ -33,7 +34,7 @@ class BlogCategoryControllerTest extends TestCase
     {
         app(BlogCategorySeeder::class)->run($this->user->id);
 
-        $response = $this->getJson($this->apiUrl('v1').'/blog/categories/create');
+        $response = $this->getJson($this->apiUrl('v1') . '/blog/categories/create');
 
         $response->assertStatus(200);
     }
@@ -42,31 +43,37 @@ class BlogCategoryControllerTest extends TestCase
     public function test_create_request_categories_data()
     {
         app(BlogCategorySeeder::class)->run($this->user->id);
-        $response = $this->getJson($this->apiUrl('v1').'/blog/categories/create', []);
-
+        $response = $this->getJson($this->apiUrl('v1') . '/blog/categories/create', []);
         $response->assertStatus(200)
-            ->assertJson(fn (AssertableJson $json) =>
-                $json->has('categories')
+            ->assertJsonStructure(['data' =>
+                    [
+                        'categories'
+                    ]
+                ]
             );
-
     }
-
 
 
     // создание категории
     public function test_store_request_200()
     {
-        $response = $this->postJson($this->apiUrl('v1').'/blog/categories', [
+        $response = $this->postJson($this->apiUrl('v1') . '/blog/categories', [
             'name' => 'Вася'
         ]);
-        $response->assertStatus(200);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'name' => 'Вася'
+                ]
+            ]);
     }
 
 
     // непрохождение валидации полей
     public function test_store_request_categories_data()
     {
-        $response = $this->postJson($this->apiUrl('v1').'/blog/categories', []);
+        $response = $this->postJson($this->apiUrl('v1') . '/blog/categories', []);
         $response->assertStatus(422)
             ->assertJson([
                 'message' => 'The given data was invalid.'
@@ -80,16 +87,16 @@ class BlogCategoryControllerTest extends TestCase
     {
         $item = $this->addCategory();
 
-        $response = $this->patchJson($this->apiUrl('v1').'/blog/categories/' . $item->id, [
+        $response = $this->patchJson($this->apiUrl('v1') . '/blog/categories/' . $item->id, [
             'name' => 'Вася'
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'data' => [
-                         'name' => 'Вася'
-                     ]
-        ]);
+            ->assertJson([
+                'data' => [
+                    'name' => 'Вася'
+                ]
+            ]);
     }
 
     // проверка обновления не своего поста
@@ -101,7 +108,7 @@ class BlogCategoryControllerTest extends TestCase
             'id' => '999999'
         ]);
         $this->actingAs($this->user);
-        $response = $this->patchJson($this->apiUrl('v1').'/blog/categories/' . $item->id, [
+        $response = $this->patchJson($this->apiUrl('v1') . '/blog/categories/' . $item->id, [
             'name' => 'Вася'
         ]);
 
@@ -117,7 +124,7 @@ class BlogCategoryControllerTest extends TestCase
         $item = $this->addCategory();
 
         $this->actingAs($this->user);
-        $response = $this->deleteJson($this->apiUrl('v1').'/blog/categories/' . $item->id);
+        $response = $this->deleteJson($this->apiUrl('v1') . '/blog/categories/' . $item->id);
 
         $response->assertStatus(204);
     }
@@ -131,7 +138,7 @@ class BlogCategoryControllerTest extends TestCase
             'id' => '999999'
         ]);
         $this->actingAs($this->user);
-        $response = $this->deleteJson($this->apiUrl('v1').'/blog/categories/' . $item->id);
+        $response = $this->deleteJson($this->apiUrl('v1') . '/blog/categories/' . $item->id);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
         $response->assertJson([
@@ -139,9 +146,6 @@ class BlogCategoryControllerTest extends TestCase
         ]);
 
     }
-
-
-
 
 
     // создание категории
