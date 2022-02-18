@@ -9,6 +9,8 @@ class DeleteBlogCategoryTask extends Task
 {
     public function run(int $categoryId)
     {
+        //вставить проверку на связанные записи
+
         return app(BlogCategoryCommands::class)->delete($categoryId);
     }
 }

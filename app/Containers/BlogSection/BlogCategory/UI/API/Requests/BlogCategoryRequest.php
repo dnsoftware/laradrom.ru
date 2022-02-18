@@ -36,7 +36,6 @@ class BlogCategoryRequest extends Request
     {
         return [
              'name' => 'required|min:3',
-
         ];
     }
 

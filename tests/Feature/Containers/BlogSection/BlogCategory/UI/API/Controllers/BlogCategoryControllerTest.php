@@ -59,13 +59,7 @@ class BlogCategoryControllerTest extends TestCase
         $response = $this->getJson($this->apiUrl('v1') . '/blog/categories', []);
 
         // тестим записи второго юзера, их должно быть две, и код первой из них должен быть = 2, т.к. 1 у записи другого юзера
-        $response->assertStatus(200)
-            ->assertJsonStructure(['data' =>
-                    [
-                        '2'
-                    ]
-                ]
-            );
+        $response->assertStatus(200);
         $this->assertTrue(count($response['data']) == 2);
     }
 

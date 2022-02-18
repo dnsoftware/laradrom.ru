@@ -11,6 +11,7 @@ use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotAuthorizedResourceException;
 use App\Ship\Parents\Actions\Action;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,16 +35,19 @@ class DeleteBlogCategoryAction extends Action
             );
 
         } catch ( ModelNotFoundException $e) {
-            $code = $e->getCode();
             return new ActionErrorDTO(
                 message: 'Категория отсутствует! Удаление невозможно!',
-                errors: [],
                 code: 404
             );
 
+        } catch (QueryException $e) {
+            return new ActionErrorDTO(
+                message: 'Удаление невозможно!',
+                code: 424
+            );
+
         } catch ( NotAuthorizedResourceException
-                | DeleteResourceFailedException
-                | \Exception $e) {
+                | DeleteResourceFailedException $e) {
 
             return new ActionErrorDTO(
                 message: $e->getMessage(),
@@ -51,10 +55,22 @@ class DeleteBlogCategoryAction extends Action
                 code: $e->getCode()
             );
 
+        } catch (\Exception $e) {
+
+            $errors = [$e->getMessage()];
+            if(method_exists($e,'getErrors')) {
+                $errors = $e->getErrors();
+            }
+
+            return new ActionErrorDTO(
+                message: $e->getMessage(),
+                errors: $errors,
+                code: $e->getCode()
+            );
+
         } catch (\Error $e) {
             return new ActionErrorDTO(
                 message: 'КРИТИЧЕСКАЯ ОШИБКА UpdateBlogCategoryByUserAction',
-                errors: [],
                 code: $e->getCode()
             );
         }
