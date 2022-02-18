@@ -39,7 +39,38 @@ class BlogCategoryControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // получение каталога для создания поста
+    /**
+     * получение рубрик пользователя блога
+     *
+     */
+    public function test_request_get_user_categories_data()
+    {
+        // 1 запись от одного пользователя
+        app(BlogCategorySeeder::class)->run($this->user->id);
+
+        $this->user = User::factory()->create([
+            'id' => 999999
+        ]);
+        // 2 записи от другого пользователя
+        $this->actingAs($this->user);
+        app(BlogCategorySeeder::class)->run($this->user->id);
+        app(BlogCategorySeeder::class)->run($this->user->id);
+
+        $response = $this->getJson($this->apiUrl('v1') . '/blog/categories', []);
+
+        // тестим записи второго юзера, их должно быть две, и код первой из них должен быть = 2, т.к. 1 у записи другого юзера
+        $response->assertStatus(200)
+            ->assertJsonStructure(['data' =>
+                    [
+                        '2'
+                    ]
+                ]
+            );
+        $this->assertTrue(count($response['data']) == 2);
+    }
+
+
+    // получение данных для создания поста
     public function test_create_request_categories_data()
     {
         app(BlogCategorySeeder::class)->run($this->user->id);

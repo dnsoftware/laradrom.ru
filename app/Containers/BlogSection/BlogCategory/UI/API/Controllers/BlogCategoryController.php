@@ -4,9 +4,11 @@ namespace App\Containers\BlogSection\BlogCategory\UI\API\Controllers;
 
 use App\Containers\BlogSection\BlogCategory\Actions\CreateBlogCategoryAction;
 use App\Containers\BlogSection\BlogCategory\Actions\DeleteBlogCategoryAction;
+use App\Containers\BlogSection\BlogCategory\Actions\GetUserBlogCategoriesAction;
 use App\Containers\BlogSection\BlogCategory\Actions\StoreBlogCategoryAction;
 use App\Containers\BlogSection\BlogCategory\Actions\UpdateBlogCategoryByUserAction;
 use App\Containers\BlogSection\BlogCategory\Data\DTO\BlogCategoryDtoFactory;
+use App\Containers\BlogSection\BlogCategory\Tasks\GetUserBlogCategoriesTask;
 use App\Containers\BlogSection\BlogCategory\UI\API\Requests\BlogCategoryRequest;
 use App\Containers\BlogSection\BlogCategory\UI\API\Requests\BlogCategoryUpdateRequest;
 use App\Ship\Parents\Controllers\ApiController;
@@ -14,6 +16,14 @@ use App\Ship\Parents\Controllers\ApiController;
 
 class BlogCategoryController extends ApiController
 {
+    public function index()
+    {
+        $userId = auth()->user()->id;
+
+        $result = app(GetUserBlogCategoriesAction::class)->run($userId);
+
+        return response()->json($result);
+    }
 
     public function create()
     {
