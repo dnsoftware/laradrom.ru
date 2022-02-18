@@ -39,7 +39,7 @@ class DeleteBlogCategoryAction extends Action
 
             return ActionErrorDTO::createExtended($e);
 
-        } catch ( ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return ActionErrorDTO::createSimple('Категория отсутствует! Удаление невозможно!', 404);
 
         } catch (QueryException $e) {

@@ -33,8 +33,7 @@ class UpdateBlogCategoryByUserAction extends Action
                 code: 200
             );
 
-        } catch ( NotAuthorizedResourceException $e) {
-
+        } catch (NotAuthorizedResourceException $e) {
             return ActionErrorDTO::createExtended($e);
 
         } catch (\Exception $e) {
