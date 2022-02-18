@@ -24,12 +24,7 @@ class StoreBlogCategoryAction extends Action
 
 
         } catch (\Exception $e) {
-
-            return new ActionErrorDTO(
-                message: $e->getMessage(),
-                errors: $e->getErrors(),
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createException($e);
 
         }
     }

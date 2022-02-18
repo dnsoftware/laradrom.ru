@@ -33,21 +33,16 @@ class UpdateBlogCategoryByUserAction extends Action
                 code: 200
             );
 
-        } catch ( NotAuthorizedResourceException
-                | \Exception $e) {
+        } catch ( NotAuthorizedResourceException $e) {
 
-            return new ActionErrorDTO(
-                message: $e->getMessage(),
-                errors: $e->getErrors(),
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createExtended($e);
+
+        } catch (\Exception $e) {
+            return ActionErrorDTO::createException($e);
 
         } catch (\Error $e) {
-            return new ActionErrorDTO(
-                message: 'КРИТИЧЕСКАЯ ОШИБКА UpdateBlogCategoryByUserAction',
-                errors: [],
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createError('КРИТИЧЕСКАЯ ОШИБКА UpdateBlogCategoryByUserAction', $e->getCode());
+
         }
 
     }
