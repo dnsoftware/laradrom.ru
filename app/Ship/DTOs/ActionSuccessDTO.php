@@ -4,7 +4,7 @@ namespace App\Ship\DTOs;
 
 class ActionSuccessDTO extends ActionReturnDTO
 {
-    public $data;
+    public $data = [];
     public array $meta = [];
     public int $code = 200;     //HTTP код ответа
     public string $status = 'success';

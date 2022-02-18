@@ -69,7 +69,8 @@ class BlogCategoryController extends ApiController
     {
         $result = app(DeleteBlogCategoryAction::class)->run($categoryId);
 
-        return response()->json($result, $result->code);
+        $res = response()->json($result, $result->code);
+        return $res;
     }
 
 }

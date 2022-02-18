@@ -34,45 +34,22 @@ class DeleteBlogCategoryAction extends Action
                 code: 204
             );
 
-        } catch ( ModelNotFoundException $e) {
-            return new ActionErrorDTO(
-                message: 'Категория отсутствует! Удаление невозможно!',
-                code: 404
-            );
-
-        } catch (QueryException $e) {
-            return new ActionErrorDTO(
-                message: 'Удаление невозможно!',
-                code: 424
-            );
-
         } catch ( NotAuthorizedResourceException
                 | DeleteResourceFailedException $e) {
 
-            return new ActionErrorDTO(
-                message: $e->getMessage(),
-                errors: $e->getErrors(),
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createExtended($e);
+
+        } catch ( ModelNotFoundException $e) {
+            return ActionErrorDTO::createSimple('Категория отсутствует! Удаление невозможно!', 404);
+
+        } catch (QueryException $e) {
+            return ActionErrorDTO::createSimple ('Удаление невозможно!', 424);
 
         } catch (\Exception $e) {
-
-            $errors = [$e->getMessage()];
-            if(method_exists($e,'getErrors')) {
-                $errors = $e->getErrors();
-            }
-
-            return new ActionErrorDTO(
-                message: $e->getMessage(),
-                errors: $errors,
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createException($e);
 
         } catch (\Error $e) {
-            return new ActionErrorDTO(
-                message: 'КРИТИЧЕСКАЯ ОШИБКА UpdateBlogCategoryByUserAction',
-                code: $e->getCode()
-            );
+            return ActionErrorDTO::createError('КРИТИЧЕСКАЯ ОШИБКА UpdateBlogCategoryByUserAction', $e->getCode());
         }
 
     }
